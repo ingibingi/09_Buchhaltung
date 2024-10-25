@@ -50,6 +50,9 @@ AbgabeErledigt: false
   - [X] Struktur definieren
   - [X] Datenbank erstellen
   - [X] Mit Testdaten befüllen
+  - [X] Datenbank einbinden
+    - [X] Projekt SQL-fähig machen
+    - [X] Einfache SQL-Abfrage in Main-Methode funktioniert
 - [ ] GUI
   - [ ] Aufbau überlegen
   - [ ] GUI bauen
@@ -90,4 +93,33 @@ AbgabeErledigt: false
 [haushaltsbuchung_leer.sql](..%2FextraFiles%2Fhaushaltsbuchung_leer.sql)
 ## Testdaten erstellen
 [haushaltsbuchung_testvorlage.sql](..%2FextraFiles%2Fhaushaltsbuchung_testvorlage.sql)
+## Datenbank einbinden
+### Projekt SQL-fähig machen
+- Plugin: Database Navigator aktivieren
+  ![PluginDatabaseNavigator.png](PluginDatabasNavigator.png)
+- MySQL Connector/J einbinden
+  - Wird benötigt damit das Java Programm die Datenbank verwenden kann
+  - Platform independent - Version
+  - [mysql-connector-j-9.1.0.jar](lib%2Fmysql-connector-j-9.1.0.jar)
+  - ![img.png](img.png)
+  - ![img_1.png](img_1.png)
+- Einfache SQL-Abfrage implementieren
+```java
+import java.sql.*;
 
+public class Main {
+    public static void main(String[] args) throws SQLException {
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/haushaltsbuchung","root","");
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM t_Buchung");
+
+        while (resultSet.next()) {
+            System.out.println(resultSet.getString(1)+"\t"
+                                +resultSet.getString(4)+"\t"
+                                +resultSet.getString(6)+"\t"
+                                +resultSet.getString(5));
+        }
+    }
+}
+```
+![img_2.png](img_2.png)
