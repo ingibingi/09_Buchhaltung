@@ -132,3 +132,6 @@ public class Main {
 - Meine bisherigen GUI-Form-Erfahrungen sind nicht sehr glücklich verlaufen
 - Deshalb: Umsetzung ohne GUI-Form, direkt in Code bauen.
 - Erster Entwurf ![FirstDesign.jpg](FirstDesign.jpg)
+- Funktionaler Prototyp![img_3.png](img_3.png)
+  - Flow-Layout für 2 Spalten
+  - Darin 2 Panele mit Box-Layout

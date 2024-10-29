@@ -12,5 +12,7 @@ public class Main {
                                 +resultSet.getString(6)+"\t"
                                 +resultSet.getString(5));
         }
+
+        GUI myGUI = new GUI();
     }
 }
