@@ -46,7 +46,7 @@ AbgabeErledigt: false
   - neue Einlage
   - neue Herausnahme
 ## ToDo
-- [ ] Datenbank
+- [X] Datenbank
   - [X] Struktur definieren
   - [X] Datenbank erstellen
   - [X] Mit Testdaten befüllen
@@ -54,7 +54,7 @@ AbgabeErledigt: false
     - [X] Projekt SQL-fähig machen
     - [X] Einfache SQL-Abfrage in Main-Methode funktioniert
 - [ ] GUI
-  - [ ] Aufbau überlegen
+  - [X] Aufbau überlegen
   - [ ] GUI bauen
 - [ ] Grundfunktionalität
   - [ ] Grundklassen erstellen
@@ -74,6 +74,7 @@ AbgabeErledigt: false
   - [ ] Person
 # Protokoll
 ## Datenbank planen
+### Aufbau
 - t_Kategorie
   - ID (int)
   - Bezeichnung (varChar(30))
@@ -81,11 +82,15 @@ AbgabeErledigt: false
   - istEingang (boolean)
 - t_Buchung
   - ID (int)
-  - ZuletztVerändert (timestamp)
+  - ZuletztVeraendert (timestamp)
   - Kategorie (FK(t_Kategorie))
   - Datum (date)
   - Zusatzinfo (text)
   - Betrag (double)
+### Ueberlegungen
+- Zusätzliches Feld `ZuletztVeraendert` 
+  - soll Ausbessern von Fehlern innerhalb eines Zeitfensters ermöglichen
+  - soll Buchungsdatum unabhängig vom Rechnungsdatum machen.
 ## Datenbank erstellen
 - MariaDB über Apache2-Webserver (via XAMPP)
 - Erstellen mit phpMyAdmin
@@ -103,7 +108,7 @@ AbgabeErledigt: false
   - [mysql-connector-j-9.1.0.jar](lib%2Fmysql-connector-j-9.1.0.jar)
   - ![img.png](img.png)
   - ![img_1.png](img_1.png)
-- Einfache SQL-Abfrage implementieren
+### Einfache SQL-Abfrage implementieren
 ```java
 import java.sql.*;
 
@@ -123,3 +128,7 @@ public class Main {
 }
 ```
 ![img_2.png](img_2.png)
+## GUI planen
+- Meine bisherigen GUI-Form-Erfahrungen sind nicht sehr glücklich verlaufen
+- Deshalb: Umsetzung ohne GUI-Form, direkt in Code bauen.
+- Erster Entwurf ![FirstDesign.jpg](FirstDesign.jpg)
