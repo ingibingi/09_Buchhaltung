@@ -1,7 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class GUI {
+public class GUI implements ActionListener {
     JFrame frame;
 
     //Historie
@@ -32,7 +34,8 @@ public class GUI {
         pnlHistorie = new JPanel();
         pnlHistorie.setLayout(new BoxLayout(pnlHistorie,BoxLayout.Y_AXIS));
         lblKontostand = new JLabel(0 + "€");
-        cbFilterKategorie = new JComboBox<>();
+
+        cbFilterKategorie = new JComboBox(Kategorie.ListeKategorien.toArray());
         txtDateVon = new JTextField("2024-01-01");
         txtDateBis = new JTextField("2024-12-31");
         txtHistorie = new JTextArea("Histirieneintrag 1\nHistorieneintrag 2");
@@ -43,7 +46,7 @@ public class GUI {
         pnlDetails = new JPanel();
         pnlDetails.setLayout(new BoxLayout(pnlDetails,BoxLayout.Y_AXIS));
         btnNeu = new JButton("Neuer Eintrag");
-        cbKategorie = new JComboBox<>();
+        cbKategorie = new JComboBox(Kategorie.ListeKategorien.toArray());
         txtDatum = new JTextField("2024-10-29");
         txtZusatzinfo = new JTextArea("Zusatzinfos\nzum Beleg");
         txtBetrag = new JTextField(0+" €");
@@ -69,5 +72,12 @@ public class GUI {
 
         frame.setVisible(true);
         frame.pack();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==btnNeu){
+            //TODO: Methode für neuen Eintrag
+        }
     }
 }

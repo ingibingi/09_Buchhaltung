@@ -55,7 +55,8 @@ AbgabeErledigt: false
     - [X] Einfache SQL-Abfrage in Main-Methode funktioniert
 - [ ] GUI
   - [X] Aufbau überlegen
-  - [ ] GUI bauen
+  - [X] GUI bauen
+  - [ ] Elemente implementieren
 - [ ] Grundfunktionalität
   - [ ] Grundklassen erstellen
   - [ ] GUI starten
@@ -132,6 +133,26 @@ public class Main {
 - Meine bisherigen GUI-Form-Erfahrungen sind nicht sehr glücklich verlaufen
 - Deshalb: Umsetzung ohne GUI-Form, direkt in Code bauen.
 - Erster Entwurf ![FirstDesign.jpg](FirstDesign.jpg)
-- Funktionaler Prototyp![img_3.png](img_3.png)
+- Erster Prototyp![img_3.png](img_3.png)
   - Flow-Layout für 2 Spalten
   - Darin 2 Panele mit Box-Layout
+## Klassen planen
+- Main
+  - Stellt Verbindung mit Datenbank her
+  - Lädt Resultsets 
+    - für Buchungen
+    - für Kategorien
+  - Erstellt String[] Kategorien
+  - Erstellt String[] Buchungen
+  - Startet GUI
+  - Füllt Liste mit Einträgen entsprechend der Datenbank
+    - D. H. Vollständige Liste ist während der
+- GUI
+  - Stellt Benutzerinteraktionen zur Verfügung
+  - Methoden zur Änderung der Elemente der Liste
+    - Hinzufügen
+    - Ändern (später)
+- Kategorie
+  - Enthält Kategoriedetails
+- Buchung
+  - Einzelne Buchung mit sämtlichen Infos aus Datenbank
