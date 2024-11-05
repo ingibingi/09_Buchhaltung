@@ -60,11 +60,11 @@ AbgabeErledigt: false
 - [ ] Grundfunktionalität
   - [X] Grundklassen erstellen
   - [X] GUI starten
-  - [ ] Datenbank einlesen/ausgeben
+  - [X] Datenbank einlesen/ausgeben
   - [ ] Eingabe neue Buchung
-  - [ ] Historie anzeigen
+  - [X] Historie anzeigen
     - [ ] Filter nach Datum
-  - [ ] Berechnung Summen
+  - [X] Berechnung Summen
   - [ ] Error-Handling
   - [ ] Bearbeitung von Eingaben
     - [ ] Löschen
@@ -264,3 +264,58 @@ public Buchung(ResultSet SingleResultSet) throws SQLException {
         listeBuchungen.add(this);
     }
 ```
+
+## GUI erweitern um Buchungen, Summen Einnahmen u. Ausgaben
+```java
+public static String getUebersichtBuchungen(){
+        uebersichtBuchungen = "";
+        for (Buchung i : listeBuchungen) {
+            uebersichtBuchungen = uebersichtBuchungen + i.toString() + "\n";
+        }
+        return uebersichtBuchungen;
+    }
+
+    public static double getEinnahmen() {
+        double sumEinnahmen = 0;
+        for (Buchung i : listeBuchungen) {
+            if (i.kategorie.istEingang) {
+                sumEinnahmen += i.betrag;
+            }
+        }
+        return sumEinnahmen;
+    }
+
+    public static double getAusgaben() {
+        double sumAusgaben = 0;
+        for (Buchung i : listeBuchungen) {
+            if (!i.kategorie.istEingang) {
+                sumAusgaben += i.betrag;
+            }
+        }
+        return sumAusgaben;
+    }
+
+    public static double getSaldo(){
+        double sumSaldo = 0;
+        for (Buchung i: listeBuchungen){
+            if (i.kategorie.istEingang){
+                sumSaldo += i.betrag;
+            } else {
+                sumSaldo -= i.betrag;
+            }
+        }
+        return sumSaldo;
+    }
+```
+```java
+public GUI(){
+        //...
+        lblEinnahmen = new JLabel("Einnahmen:\t"+Buchung.getEinnahmen()+" €");
+        lblAusgaben = new JLabel("Ausgaben:\t"+Buchung.getAusgaben()+" €");
+        lblSaldo = new JLabel("Saldo:\t"+Buchung.getSaldo()+" €");
+        //...
+        txtHistorie = new JTextArea(Buchung.uebersichtBuchungen);
+        //...
+```
+
+

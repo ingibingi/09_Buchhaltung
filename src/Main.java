@@ -19,27 +19,10 @@ public class Main {
             new Buchung(resultSetBuchungen);
         }
 
-
         System.out.println("\nBuchungen");
-        while (resultSetBuchungen.next()) {
-            System.out.println(resultSetBuchungen.getString(1)+"\t"
-                    + resultSetBuchungen.getString(2)+"\t"
-                    + resultSetBuchungen.getString(3)+"\t"
-                    + resultSetBuchungen.getString(4)+"\t"
-                    + resultSetBuchungen.getString(5)+"\t"
-                    + resultSetBuchungen.getString(6));
-        }
-
-        System.out.println("\nKategorien");
-        while (resultSetKategorien.next()) {
-            System.out.println(resultSetKategorien.getString(1)+"\t"
-                    + resultSetKategorien.getString(2)+"\t"
-                    + resultSetKategorien.getString(3)+"\t"
-                    + resultSetKategorien.getString(4));
-        }
+        System.out.println(Buchung.getUebersichtBuchungen());
 
         GUI myGUI = new GUI();
-
 
     }
 }

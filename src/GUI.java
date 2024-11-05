@@ -38,10 +38,10 @@ public class GUI implements ActionListener {
         cbFilterKategorie = new JComboBox(Kategorie.listeKategorien.toArray());
         txtDateVon = new JTextField("2024-01-01");
         txtDateBis = new JTextField("2024-12-31");
-        txtHistorie = new JTextArea("Histirieneintrag 1\nHistorieneintrag 2");
-        lblEinnahmen = new JLabel(0+" €");
-        lblAusgaben = new JLabel(0+" €");
-        lblSaldo = new JLabel(0+" €");
+        txtHistorie = new JTextArea(Buchung.uebersichtBuchungen);
+        lblEinnahmen = new JLabel("Einnahmen:\t"+Buchung.getEinnahmen()+" €");
+        lblAusgaben = new JLabel("Ausgaben:\t"+Buchung.getAusgaben()+" €");
+        lblSaldo = new JLabel("Saldo:\t"+Buchung.getSaldo()+" €");
 
         pnlDetails = new JPanel();
         pnlDetails.setLayout(new BoxLayout(pnlDetails,BoxLayout.Y_AXIS));
