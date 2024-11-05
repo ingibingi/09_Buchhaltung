@@ -25,6 +25,10 @@ public class Kategorie {
         listeKategorien.add(this);
     }
 
+    public static Kategorie findKategorieById(int id){
+        return listeKategorien.stream().filter(kategorie -> id== kategorie.id).findFirst().orElse(null);
+    }
+
     @Override
     public String toString() {
         return this.bezeichnung;

@@ -244,3 +244,23 @@ public class Buchung {
 }
 
 ```
+
+### Problem mit Datum und Kategorieindex und Buchungsindex beheben
+- war bisher problematisch weil index nicht übereinstimmt mit länge der Liste
+  - neue Methode zum auslesen der Kategorie über die id
+```java
+  public static Kategorie findKategorieById(int id){
+  return listeKategorien.stream().filter(kategorie -> id== kategorie.id).findFirst().orElse(null);
+}
+
+```
+
+```java
+public Buchung(ResultSet SingleResultSet) throws SQLException {
+        //...
+        int kategorieID = SingleResultSet.getInt(3);
+        this.kategorie = Kategorie.findKategorieById(kategorieID);
+         //...
+        listeBuchungen.add(this);
+    }
+```

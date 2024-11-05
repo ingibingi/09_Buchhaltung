@@ -15,7 +15,9 @@ public class Main {
         //Buchungen aus DB auslesen
         Statement statementBuchungen = connection.createStatement();
         ResultSet resultSetBuchungen = statementBuchungen.executeQuery("SELECT * FROM t_Buchung");
-
+        while (resultSetBuchungen.next()){
+            new Buchung(resultSetBuchungen);
+        }
 
 
         System.out.println("\nBuchungen");

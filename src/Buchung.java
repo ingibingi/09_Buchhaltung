@@ -1,14 +1,14 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
 public class Buchung {
     static ArrayList<Buchung> listeBuchungen = new ArrayList<>();
     int id;
-    LocalDateTime zuletztVeraendert;
+    Timestamp zuletztVeraendert;
     Kategorie kategorie;
     LocalDate datum;
     String zusatzinfo;
@@ -16,9 +16,9 @@ public class Buchung {
 
     public Buchung(ResultSet SingleResultSet) throws SQLException {
         this.id = SingleResultSet.getInt(1);
-        this.zuletztVeraendert = LocalDateTime.parse(SingleResultSet.getString(2));
+        this.zuletztVeraendert = Timestamp.valueOf(SingleResultSet.getString(2));
         int kategorieID = SingleResultSet.getInt(3);
-        this.kategorie = Kategorie.listeKategorien.get(kategorieID);
+        this.kategorie = Kategorie.findKategorieById(kategorieID);
         this.datum = LocalDate.parse(SingleResultSet.getString(4));
         this.zusatzinfo = SingleResultSet.getString(5);
         this.betrag = SingleResultSet.getDouble(6);
@@ -27,7 +27,7 @@ public class Buchung {
 
     public Buchung(Kategorie kategorie, LocalDate datum, String zusatzinfo, double betrag){
         this.id = listeBuchungen.size()+1;
-        this.zuletztVeraendert = LocalDateTime.now();
+        this.zuletztVeraendert = new Timestamp(System.currentTimeMillis());
         this.kategorie = kategorie;
         this.datum = datum;
         this.zusatzinfo = zusatzinfo;
@@ -41,6 +41,10 @@ public class Buchung {
                 +this.datum.toString()+"\t"
                 +this.kategorie.kurzbezeichnung.toString()+"\t"
                 +this.betrag+" €";
+    }
+
+    public static Buchung findBuchungById(int id){
+        return listeBuchungen.stream().filter(buchung -> id== buchung.id).findFirst().orElse(null);
     }
 
 
