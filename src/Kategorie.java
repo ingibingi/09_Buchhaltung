@@ -3,30 +3,30 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Kategorie {
-    static ArrayList<Kategorie> ListeKategorien = new ArrayList<>();
-    int ID;
-    String Bezeichnung;
-    String Kurzbezeichnung;
+    static ArrayList<Kategorie> listeKategorien = new ArrayList<>();
+    int id;
+    String bezeichnung;
+    String kurzbezeichnung;
     Boolean istEingang;
 
     public Kategorie(ResultSet SingleResultSet) throws SQLException {
-            this.ID = SingleResultSet.getInt(1);
-            this.Bezeichnung = SingleResultSet.getString(2);
-            this.Kurzbezeichnung = SingleResultSet.getString(3);
+            this.id = SingleResultSet.getInt(1);
+            this.bezeichnung = SingleResultSet.getString(2);
+            this.kurzbezeichnung = SingleResultSet.getString(3);
             this.istEingang = SingleResultSet.getBoolean(4);
-            ListeKategorien.add(this);
+            listeKategorien.add(this);
     }
 
-    public Kategorie(int ID, String Bezeichnung, String Kurzbezeichnung, Boolean istEingang){
-        this.ID = ID;
-        this.Bezeichnung=Bezeichnung;
-        this.Kurzbezeichnung=Kurzbezeichnung;
+    public Kategorie(String Bezeichnung, String Kurzbezeichnung, Boolean istEingang){
+        this.id = listeKategorien.size()+1;
+        this.bezeichnung =Bezeichnung;
+        this.kurzbezeichnung =Kurzbezeichnung;
         this.istEingang=istEingang;
-        ListeKategorien.add(this);
+        listeKategorien.add(this);
     }
 
     @Override
     public String toString() {
-        return this.Bezeichnung;
+        return this.bezeichnung;
     }
 }

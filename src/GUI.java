@@ -35,7 +35,7 @@ public class GUI implements ActionListener {
         pnlHistorie.setLayout(new BoxLayout(pnlHistorie,BoxLayout.Y_AXIS));
         lblKontostand = new JLabel(0 + "€");
 
-        cbFilterKategorie = new JComboBox(Kategorie.ListeKategorien.toArray());
+        cbFilterKategorie = new JComboBox(Kategorie.listeKategorien.toArray());
         txtDateVon = new JTextField("2024-01-01");
         txtDateBis = new JTextField("2024-12-31");
         txtHistorie = new JTextArea("Histirieneintrag 1\nHistorieneintrag 2");
@@ -46,7 +46,7 @@ public class GUI implements ActionListener {
         pnlDetails = new JPanel();
         pnlDetails.setLayout(new BoxLayout(pnlDetails,BoxLayout.Y_AXIS));
         btnNeu = new JButton("Neuer Eintrag");
-        cbKategorie = new JComboBox(Kategorie.ListeKategorien.toArray());
+        cbKategorie = new JComboBox(Kategorie.listeKategorien.toArray());
         txtDatum = new JTextField("2024-10-29");
         txtZusatzinfo = new JTextArea("Zusatzinfos\nzum Beleg");
         txtBetrag = new JTextField(0+" €");
