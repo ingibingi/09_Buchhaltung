@@ -107,7 +107,5 @@ public class Main {
 
             Statement statementBuchungen = connection.createStatement();
             statementBuchungen.executeUpdate(myQuery);
-
-
     }
 }
