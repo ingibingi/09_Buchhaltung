@@ -21,8 +21,10 @@ public class GUI implements ActionListener {
     JLabel lblEinnahmen;
     JLabel lblAusgaben;
     JLabel lblSaldo;
+    JButton btnShowAll;
 
     //Details
+    JComboBox cbBuchung;
     JPanel pnlDetails;
     JButton btnNeu;
     JComboBox cbKategorie;
@@ -31,6 +33,8 @@ public class GUI implements ActionListener {
     JTextField txtBetrag;
     JLabel lblEuroSymbol;
     JPanel pnlBetrag;
+    JButton btnSpeichern;
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -52,6 +56,7 @@ public class GUI implements ActionListener {
             }
 
             txtHistorie.setText(Buchung.getUebersichtBuchungen());
+            cbBuchung.setModel(new DefaultComboBoxModel<>(Buchung.listeBuchungenAuswahl.toArray()));
         }
 
         if(e.getSource()==btnSpeichern){
@@ -68,9 +73,27 @@ public class GUI implements ActionListener {
                 throw new RuntimeException(ex);
             }
         }
+
+        if(e.getSource()==btnShowAll){
+            Buchung.removeFilter();
+            txtHistorie.setText(Buchung.getUebersichtBuchungen());
+        }
+
+        if(e.getSource()==cbBuchung){
+            Buchung buchung = (Buchung) cbBuchung.getSelectedItem();
+            Kategorie kategorie = buchung.kategorie;
+            LocalDate date = buchung.datum;
+            String zusatzinfo = buchung.zusatzinfo;
+            Double betrag = buchung.betrag;
+
+            cbKategorie.setSelectedItem(kategorie);
+            txtDatum.setText(String.valueOf(date));
+            txtZusatzinfo.setText(zusatzinfo);
+            txtBetrag.setText(String.valueOf(betrag));
+
+        }
     }
 
-    JButton btnSpeichern;
 
     public GUI(){
         frame = new JFrame("Haushaltsrechner");
@@ -91,10 +114,13 @@ public class GUI implements ActionListener {
         lblEinnahmen = new JLabel("Einnahmen:\t"+Buchung.getEinnahmen()+" €");
         lblAusgaben = new JLabel("Ausgaben:\t"+Buchung.getAusgaben()+" €");
         lblSaldo = new JLabel("Saldo:\t"+Buchung.getSaldo()+" €");
+        btnShowAll = new JButton("Alle Anzeigen");
+
 
         pnlDetails = new JPanel();
         pnlDetails.setLayout(new BoxLayout(pnlDetails,BoxLayout.Y_AXIS));
         btnNeu = new JButton("Neuer Eintrag");
+        cbBuchung = new JComboBox(Buchung.listeBuchungenAuswahl.toArray());
         cbKategorie = new JComboBox(Kategorie.listeKategorien.toArray());
         txtDatum = new JTextField("2024-10-29");
         txtZusatzinfo = new JTextArea("Zusatzinfos\nzum Beleg");
@@ -116,9 +142,11 @@ public class GUI implements ActionListener {
         pnlHistorie.add(lblEinnahmen);
         pnlHistorie.add(lblAusgaben);
         pnlHistorie.add(lblSaldo);
+        pnlHistorie.add(btnShowAll);
 
         frame.add(pnlDetails);
         pnlDetails.add(btnNeu);
+        pnlDetails.add(cbBuchung);
         pnlDetails.add(cbKategorie);
         pnlDetails.add(txtDatum);
         pnlDetails.add(txtZusatzinfo);
@@ -128,6 +156,8 @@ public class GUI implements ActionListener {
         btnAktualisieren.addActionListener(this);
         btnNeu.addActionListener(this);
         btnSpeichern.addActionListener(this);
+        btnShowAll.addActionListener(this);
+        cbBuchung.addActionListener(this);
 
         frame.setVisible(true);
         frame.pack();

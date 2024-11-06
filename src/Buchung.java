@@ -36,10 +36,9 @@ public class Buchung {
 
     @Override
     public String toString() {
-        return this.kategorie.istEingang.toString()+"\t"
-                +this.datum.toString()+"\t"
-                +this.kategorie.kurzbezeichnung.toString()+"\t"
-                +this.betrag+" €";
+        return this.datum.toString()+", "
+                +this.betrag+" €, "
+                +this.kategorie.kurzbezeichnung.toString();
     }
 
     public static Buchung findBuchungById(int id){

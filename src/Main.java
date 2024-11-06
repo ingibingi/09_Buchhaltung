@@ -69,7 +69,7 @@ public class Main {
         } else {
             myQuery = "SELECT * FROM t_Buchung";
         }
-    System.out.println(myQuery);
+
         Statement statementBuchungen = connection.createStatement();
         ResultSet resultSetBuchungen = statementBuchungen.executeQuery(myQuery);
         Buchung.listeBuchungenAuswahl = new ArrayList<>();

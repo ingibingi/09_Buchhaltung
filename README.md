@@ -391,3 +391,16 @@ public void actionPerformed(ActionEvent e) {
 - myString = myString.concat("!");
   - ändert myString
 
+## Combobox für Auswahl bei Details
+```java
+public void actionPerformed(ActionEvent e) {
+    //...
+    if (e.getSource() == btnAktualisieren) {
+        //...
+
+        txtHistorie.setText(Buchung.getUebersichtBuchungen());
+        cbBuchung.setModel(new DefaultComboBoxModel<>(Buchung.listeBuchungenAuswahl.toArray()));
+    }
+}
+```
+
