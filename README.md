@@ -318,4 +318,16 @@ public GUI(){
         //...
 ```
 
+## Zweifel an Projektstruktur
+- Ist es sinnvoll dass ich die Klasse Kategorie und Buchung habe?
+- Wozu brauche ich Kategorie- und Buchungs-Objekte?
+  - Ich mache alles unnötigerweise doppelt.
+- Alternativ könnte ich:
+  - Ich kann in Main eine ArrayList<String> erstellen in der die Kategorien gespeichert sind
+  - Die Ausgaben mach ich auch direkt über resultSets.
+  - Das Eingeben von neuen Buchungen wäre so auch einfach er umsetzbar
+- Bevor ich jetzt alles was ich hab überstürzt über den Haufen schmeiße
+  - mache ich jetzt zumindes noch die eingabe von neuen Buchungen,
+  - damit ich etwas funktionsfähiges zum abgeben habe.
+
 

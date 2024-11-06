@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 
 public class Buchung {
-    static ArrayList<Buchung> listeBuchungen = new ArrayList<>();
-    static String uebersichtBuchungen = "";
+    static ArrayList<Buchung> listeBuchungenAlle = new ArrayList<>();
+    static ArrayList<Buchung> listeBuchungenAuswahl = new ArrayList<>();
     int id;
     Timestamp zuletztVeraendert;
     Kategorie kategorie;
@@ -23,7 +23,7 @@ public class Buchung {
         this.datum = LocalDate.parse(SingleResultSet.getString(4));
         this.zusatzinfo = SingleResultSet.getString(5);
         this.betrag = SingleResultSet.getDouble(6);
-        listeBuchungen.add(this);
+        listeBuchungenAlle.add(this);
     }
 
     public Buchung(Kategorie kategorie, LocalDate datum, String zusatzinfo, double betrag){
@@ -33,7 +33,7 @@ public class Buchung {
         this.datum = datum;
         this.zusatzinfo = zusatzinfo;
         this.betrag = betrag;
-        listeBuchungen.add(this);
+        listeBuchungenAlle.add(this);
     }
 
     @Override
@@ -45,12 +45,12 @@ public class Buchung {
     }
 
     public static Buchung findBuchungById(int id){
-        return listeBuchungen.stream().filter(buchung -> id== buchung.id).findFirst().orElse(null);
+        return listeBuchungenAlle.stream().filter(buchung -> id== buchung.id).findFirst().orElse(null);
     }
 
     public static String getUebersichtBuchungen(){
-        uebersichtBuchungen = "";
-        for (Buchung i : listeBuchungen) {
+        String uebersichtBuchungen = "";
+        for (Buchung i : listeBuchungenAuswahl) {
             uebersichtBuchungen = uebersichtBuchungen + i.toString() + "\n";
         }
         return uebersichtBuchungen;
@@ -58,7 +58,7 @@ public class Buchung {
 
     public static double getEinnahmen() {
         double sumEinnahmen = 0;
-        for (Buchung i : listeBuchungen) {
+        for (Buchung i : listeBuchungenAuswahl) {
             if (i.kategorie.istEingang) {
                 sumEinnahmen += i.betrag;
             }
@@ -68,7 +68,7 @@ public class Buchung {
 
     public static double getAusgaben() {
         double sumAusgaben = 0;
-        for (Buchung i : listeBuchungen) {
+        for (Buchung i : listeBuchungenAuswahl) {
             if (!i.kategorie.istEingang) {
                 sumAusgaben += i.betrag;
             }
@@ -78,7 +78,7 @@ public class Buchung {
 
     public static double getSaldo(){
         double sumSaldo = 0;
-        for (Buchung i: listeBuchungen){
+        for (Buchung i: listeBuchungenAuswahl){
             if (i.kategorie.istEingang){
                 sumSaldo += i.betrag;
             } else {
@@ -87,6 +87,12 @@ public class Buchung {
         }
         return sumSaldo;
     }
+
+    public static void removeFilter(){
+        listeBuchungenAuswahl = listeBuchungenAlle;
+    }
+
+
 
 
 }
