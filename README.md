@@ -385,5 +385,9 @@ public void actionPerformed(ActionEvent e) {
             statementBuchungen.executeUpdate(myQuery);
     }
 ```
-
+## Merke!
+- myString.concat("!");
+  - ändert myString NICHT
+- myString = myString.concat("!");
+  - ändert myString
 

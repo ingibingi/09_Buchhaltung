@@ -29,6 +29,9 @@ public class GUI implements ActionListener {
     JTextField txtDatum;
     JTextArea txtZusatzinfo;
     JTextField txtBetrag;
+    JLabel lblEuroSymbol;
+    JPanel pnlBetrag;
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==btnNeu){
@@ -95,8 +98,13 @@ public class GUI implements ActionListener {
         cbKategorie = new JComboBox(Kategorie.listeKategorien.toArray());
         txtDatum = new JTextField("2024-10-29");
         txtZusatzinfo = new JTextArea("Zusatzinfos\nzum Beleg");
-        txtBetrag = new JTextField(0+" €");
+        txtBetrag = new JTextField(10);
+        lblEuroSymbol = new JLabel("€");
         btnSpeichern = new JButton("Speichern");
+
+        pnlBetrag = new JPanel();
+        pnlBetrag.add(txtBetrag);
+        pnlBetrag.add(lblEuroSymbol);
 
         frame.add(pnlHistorie);
         pnlHistorie.add(lblKontostand);
@@ -114,7 +122,7 @@ public class GUI implements ActionListener {
         pnlDetails.add(cbKategorie);
         pnlDetails.add(txtDatum);
         pnlDetails.add(txtZusatzinfo);
-        pnlDetails.add(txtBetrag);
+        pnlDetails.add(pnlBetrag);
         pnlDetails.add(btnSpeichern);
 
         btnAktualisieren.addActionListener(this);
