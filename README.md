@@ -330,4 +330,59 @@ public GUI(){
   - mache ich jetzt zumindes noch die eingabe von neuen Buchungen,
   - damit ich etwas funktionsfähiges zum abgeben habe.
 
+## Neue Buchung speichern
+```java
+public void actionPerformed(ActionEvent e) {
+        //...
+        if(e.getSource()==btnSpeichern){
+
+            Kategorie kategorie = (Kategorie) cbKategorie.getSelectedItem();
+            LocalDate datum = LocalDate.parse(txtDatum.getText());
+            String zusatzinfo = txtZusatzinfo.getText();
+            double betrag = Double.parseDouble(txtBetrag.getText());
+
+            Buchung buchung = new Buchung(kategorie,datum,zusatzinfo,betrag);
+            try {
+                Main.insertBuchung(buchung);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    }
+```
+
+```java
+    public static void insertBuchung(Buchung buchung) throws SQLException {
+        String myQuery = "INSERT INTO t_Buchung " +
+            "(`ID`, `ZuletztVeraendert`, `Kategorie`, `Datum`, `Zusatzinfo`, `Betrag`) " +
+            "VALUES (";
+            //ID
+                if(buchung.id>0){
+                    myQuery = myQuery.concat("'"+buchung.id+"',");
+                }else {
+                    myQuery = myQuery.concat("NULL,");
+                }
+            //ZuletztVeraendert
+                 myQuery = myQuery.concat("current_timestamp(),");
+            //Kategorie
+                myQuery = myQuery.concat(buchung.kategorie.id+",");
+            //Datum
+                if(buchung.datum.equals(null)){
+                    myQuery = myQuery.concat("CURDATE(),");
+                } else {
+                    myQuery = myQuery.concat("'"+buchung.datum + "',");
+                }
+            //Zusatzinfo
+                    myQuery = myQuery.concat("'"+buchung.zusatzinfo+"',");
+            //Betrag
+                myQuery = myQuery.concat("'"+buchung.betrag+"'");
+                myQuery = myQuery.concat(");");
+
+            System.out.println("myQuery: "+myQuery);
+
+            Statement statementBuchungen = connection.createStatement();
+            statementBuchungen.executeUpdate(myQuery);
+    }
+```
+
 
