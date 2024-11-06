@@ -47,6 +47,8 @@ public class GUI implements ActionListener {
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
+
+            txtHistorie.setText(Buchung.getUebersichtBuchungen());
         }
 
         if(e.getSource()==btnSpeichern){
@@ -63,8 +65,6 @@ public class GUI implements ActionListener {
                 throw new RuntimeException(ex);
             }
         }
-
-
     }
 
     JButton btnSpeichern;

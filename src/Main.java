@@ -37,7 +37,8 @@ public class Main {
         ResultSet resultSetBuchungen = statementBuchungen.executeQuery("SELECT * FROM t_Buchung");
         Buchung.listeBuchungenAlle = new ArrayList<>();
         while (resultSetBuchungen.next()){
-            new Buchung(resultSetBuchungen);
+            Buchung buchung = new Buchung(resultSetBuchungen);
+            Buchung.listeBuchungenAlle.add(buchung);
         }
     }
 
@@ -46,21 +47,21 @@ public class Main {
         String myQuery = "";
 
         if (dtFrom != null) {
-            myQuery.concat(dtFrom + " <= b.Datum");
+            myQuery = myQuery.concat(dtFrom + " <= b.Datum");
         }
 
         if (dtUntil != null) {
             if (myQuery.length()>0){
-                myQuery.concat(" AND ");
+                myQuery = myQuery.concat(" AND ");
             }
-            myQuery.concat(dtUntil + " <= b.Datum");
+            myQuery = myQuery.concat(dtUntil + " <= b.Datum");
         }
 
         if (kategorie != null) {
             if (myQuery.length()>0){
-                myQuery.concat(" AND ");
+                myQuery = myQuery.concat(" AND ");
             }
-            myQuery.concat(kategorie.id + " = b.Kategorie");
+            myQuery = myQuery.concat(kategorie.id + " = b.Kategorie");
         }
 
         if (myQuery.length()>0){
@@ -68,12 +69,13 @@ public class Main {
         } else {
             myQuery = "SELECT * FROM t_Buchung";
         }
-
+    System.out.println(myQuery);
         Statement statementBuchungen = connection.createStatement();
         ResultSet resultSetBuchungen = statementBuchungen.executeQuery(myQuery);
         Buchung.listeBuchungenAuswahl = new ArrayList<>();
         while (resultSetBuchungen.next()){
-            new Buchung(resultSetBuchungen);
+            Buchung buchung = new Buchung(resultSetBuchungen);
+            Buchung.listeBuchungenAuswahl.add(buchung);
         }
     }
 

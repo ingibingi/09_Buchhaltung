@@ -23,7 +23,6 @@ public class Buchung {
         this.datum = LocalDate.parse(SingleResultSet.getString(4));
         this.zusatzinfo = SingleResultSet.getString(5);
         this.betrag = SingleResultSet.getDouble(6);
-        listeBuchungenAlle.add(this);
     }
 
     public Buchung(Kategorie kategorie, LocalDate datum, String zusatzinfo, double betrag){
@@ -33,7 +32,6 @@ public class Buchung {
         this.datum = datum;
         this.zusatzinfo = zusatzinfo;
         this.betrag = betrag;
-        listeBuchungenAlle.add(this);
     }
 
     @Override
@@ -91,8 +89,4 @@ public class Buchung {
     public static void removeFilter(){
         listeBuchungenAuswahl = listeBuchungenAlle;
     }
-
-
-
-
 }
